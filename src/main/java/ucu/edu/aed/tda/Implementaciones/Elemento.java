@@ -4,9 +4,18 @@ import java.util.function.Consumer;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
-public class Elemento implements ucu.edu.aed.tda.Interfaces.TDAElemento {
+public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento {
 
-    @Override
+    T dato;
+    Elemento<T> hijoIzquierdo;
+    Elemento<T> hijoDerecho;
+
+    public Elemento(T dato) {
+        this.dato = dato;
+        this.hijoIzquierdo = null;
+        this.hijoDerecho = null;
+    }
+    
     public void setHijoIzquierdo(TDAElemento hijoIzquierdo) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setHijoIzquierdo'");
@@ -56,8 +65,25 @@ public class Elemento implements ucu.edu.aed.tda.Interfaces.TDAElemento {
 
     @Override
     public boolean insertar(Comparable nuevoDato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertar'");
+        Elemento<T> nuevoElemento = new Elemento<>(nuevoDato);
+
+        if (nuevoDato.compareTo(this.dato) < 0) {
+            if (hijoIzquierdo == null) {
+                hijoIzquierdo = nuevoElemento;
+                return true;
+            } else {
+                return ((Elemento<T>) hijoIzquierdo).insertar(nuevoDato);
+            }
+        } else if (nuevoDato.compareTo(this.dato) > 0) {
+            if (hijoDerecho == null) {
+                hijoDerecho = nuevoElemento;
+                return true;
+            } else {
+                return ((Elemento<T>) hijoDerecho).insertar(nuevoDato);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override

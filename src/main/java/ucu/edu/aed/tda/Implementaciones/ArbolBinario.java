@@ -1,8 +1,14 @@
+
 package ucu.edu.aed.tda.Implementaciones;
 
 import java.util.function.Consumer;
 
-public class ArbolBinario implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario {
+import ucu.edu.aed.tda.Interfaces.TDAElemento;
+
+public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario<T> {
+
+    private static int contador = 0;
+    private Elemento<T> raiz;
 
     @Override
     public Object buscar(Comparable predicate) {
@@ -11,7 +17,7 @@ public class ArbolBinario implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario 
     }
 
     @Override
-    public Object obtenerRaiz() {
+    public TDAElemento<T> obtenerRaiz() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'obtenerRaiz'");
     }
@@ -24,8 +30,28 @@ public class ArbolBinario implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario 
 
     @Override
     public boolean insertar(Comparable dato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertar'");
+
+
+        if (raiz == null) {
+            ++contador;
+            Elemento<T> nuevoElemento = new Elemento<>(dato);
+            raiz = nuevoElemento;
+        }
+        else 
+        {
+            if(raiz.insertar(dato)) {
+                ++contador;
+            }else {
+                return false;
+            }
+        }
+
+        System.out.println("Contador insertar desde árbol: " + contador);
+        return true;
+    }
+
+    public int getContador() {
+        return contador;
     }
 
     @Override
