@@ -4,42 +4,36 @@ import java.util.function.Consumer;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
-public class Elemento implements ucu.edu.aed.tda.Interfaces.TDAElemento {
+public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
+
+    private T dato;
+    private TDAElemento<T> hijoIzq;
+    private TDAElemento<T> hijoDer;
 
     @Override
     public void setHijoIzquierdo(TDAElemento hijoIzquierdo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setHijoIzquierdo'");
+
+        this.hijoIzq = hijoIzquierdo;
     }
 
     @Override
     public void setHijoDerecho(TDAElemento hijoDerecho) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setHijoDerecho'");
+        this.hijoDer = hijoDerecho;
     }
 
     @Override
     public TDAElemento getHijoIzquierdo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHijoIzquierdo'");
+        return this.hijoIzq;
     }
 
     @Override
     public TDAElemento getHijoDerecho() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHijoDerecho'");
+        return this.hijoDer;
     }
 
     @Override
-    public void setDato(Object dato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDato'");
-    }
-
-    @Override
-    public Object getDato() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDato'");
+    public T getDato() {
+        return this.dato;
     }
 
     @Override
@@ -113,5 +107,10 @@ public class Elemento implements ucu.edu.aed.tda.Interfaces.TDAElemento {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'obtenerNivel'");
     }
-    
+
+    @Override
+    public void setDato(T dato) {
+        this.dato = dato;
+    }
+
 }

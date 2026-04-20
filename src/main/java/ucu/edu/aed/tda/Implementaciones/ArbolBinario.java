@@ -2,16 +2,26 @@ package ucu.edu.aed.tda.Implementaciones;
 
 import java.util.function.Consumer;
 
-public class ArbolBinario implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario {
+import ucu.edu.aed.tda.Interfaces.TDAElemento;
+
+public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario {
+
+    private TDAElemento<T> raiz;
 
     @Override
-    public Object buscar(Comparable predicate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscar'");
+    public T buscar(Comparable predicate) {
+        if (raiz != null) {
+            TDAElemento<T> resultado = raiz.buscar(predicate);
+            if (resultado == null)
+                return null;
+            return resultado.getDato();
+        }
+        return null;
+
     }
 
     @Override
-    public Object obtenerRaiz() {
+    public T obtenerRaiz() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'obtenerRaiz'");
     }
@@ -69,5 +79,5 @@ public class ArbolBinario implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario 
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'cantidadNodosInternos'");
     }
-    
+
 }
