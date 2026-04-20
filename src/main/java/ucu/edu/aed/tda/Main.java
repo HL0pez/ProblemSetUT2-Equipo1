@@ -13,11 +13,11 @@ public class Main {
 
         try {
             BufferedReader entrada = new BufferedReader(
-                new FileReader("../../../../../resources/claves1.txt")
+                new FileReader("src/main/resources/claves1.txt")
             );
 
             BufferedWriter salida = new BufferedWriter(
-                new FileWriter("../../../../../resources/claves1Salida.txt")
+                new FileWriter("src/main/resources/claves1Salida.txt")
             );
 
             ArbolBinario<Integer> arbol = new ArbolBinario<>();

@@ -11,13 +11,19 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
     private Elemento<T> raiz;
 
     @Override
-    public Object buscar(Comparable predicate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscar'");
+    public T buscar(Comparable predicate) {
+        if (raiz != null) {
+            TDAElemento<T> resultado = raiz.buscar(predicate);
+            if (resultado == null)
+                return null;
+            return resultado.getDato();
+        }
+        return null;
+
     }
 
     @Override
-    public TDAElemento<T> obtenerRaiz() {
+    public Elemento<T> obtenerRaiz() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'obtenerRaiz'");
     }
@@ -95,5 +101,5 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'cantidadNodosInternos'");
     }
-    
+
 }

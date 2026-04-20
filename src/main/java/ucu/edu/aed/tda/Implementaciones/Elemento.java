@@ -4,51 +4,41 @@ import java.util.function.Consumer;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
-public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento {
+public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
 
-    T dato;
-    Elemento<T> hijoIzquierdo;
-    Elemento<T> hijoDerecho;
+    private T dato;
+    private TDAElemento<T> hijoIzq;
+    private TDAElemento<T> hijoDer;
 
     public Elemento(T dato) {
         this.dato = dato;
-        this.hijoIzquierdo = null;
-        this.hijoDerecho = null;
+        this.hijoIzq = null;
+        this.hijoDer = null;
     }
     
     public void setHijoIzquierdo(TDAElemento hijoIzquierdo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setHijoIzquierdo'");
+
+        this.hijoIzq = hijoIzquierdo;
     }
 
     @Override
     public void setHijoDerecho(TDAElemento hijoDerecho) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setHijoDerecho'");
+        this.hijoDer = hijoDerecho;
     }
 
     @Override
     public TDAElemento getHijoIzquierdo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHijoIzquierdo'");
+        return this.hijoIzq;
     }
 
     @Override
     public TDAElemento getHijoDerecho() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHijoDerecho'");
+        return this.hijoDer;
     }
 
     @Override
-    public void setDato(Object dato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDato'");
-    }
-
-    @Override
-    public Object getDato() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDato'");
+    public T getDato() {
+        return this.dato;
     }
 
     @Override
@@ -68,18 +58,18 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento {
         Elemento<T> nuevoElemento = new Elemento<>(nuevoDato);
 
         if (nuevoDato.compareTo(this.dato) < 0) {
-            if (hijoIzquierdo == null) {
-                hijoIzquierdo = nuevoElemento;
+            if (hijoIzq == null) {
+                hijoIzq = nuevoElemento;
                 return true;
             } else {
-                return ((Elemento<T>) hijoIzquierdo).insertar(nuevoDato);
+                return ((Elemento<T>) hijoIzq).insertar(nuevoDato);
             }
         } else if (nuevoDato.compareTo(this.dato) > 0) {
-            if (hijoDerecho == null) {
-                hijoDerecho = nuevoElemento;
+            if (hijoDer == null) {
+                hijoDer = nuevoElemento;
                 return true;
             } else {
-                return ((Elemento<T>) hijoDerecho).insertar(nuevoDato);
+                return ((Elemento<T>) hijoDer).insertar(nuevoDato);
             }
         } else {
             return false;
@@ -88,20 +78,22 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento {
 
     @Override
     public void inOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inOrder'");
+        if (hijoIzq != null) hijoIzq.inOrder(consumidor);
+        consumidor.accept(this);
+        if (hijoDer != null) hijoDer.inOrder(consumidor);
     }
-
     @Override
     public void preOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'preOrder'");
+        consumidor.accept(this);
+        if (hijoIzq != null) hijoIzq.preOrder(consumidor);
+        if (hijoDer != null) hijoDer.preOrder(consumidor);
     }
 
     @Override
     public void postOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postOrder'");
+        if (hijoIzq != null) hijoIzq.postOrder(consumidor);
+        if (hijoDer != null) hijoDer.postOrder(consumidor);
+        consumidor.accept(this);
     }
 
     @Override
@@ -139,5 +131,10 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'obtenerNivel'");
     }
-    
+
+    @Override
+    public void setDato(T dato) {
+        this.dato = dato;
+    }
+
 }
