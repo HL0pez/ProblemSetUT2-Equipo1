@@ -56,20 +56,22 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
 
     @Override
     public void inOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inOrder'");
+        if (hijoIzq != null) hijoIzq.inOrder(consumidor);
+        consumidor.accept(this);
+        if (hijoDer != null) hijoDer.inOrder(consumidor);
     }
-
     @Override
     public void preOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'preOrder'");
+        consumidor.accept(this);
+        if (hijoIzq != null) hijoIzq.preOrder(consumidor);
+        if (hijoDer != null) hijoDer.preOrder(consumidor);
     }
 
     @Override
     public void postOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postOrder'");
+        if (hijoIzq != null) hijoIzq.postOrder(consumidor);
+        if (hijoDer != null) hijoDer.postOrder(consumidor);
+        consumidor.accept(this);
     }
 
     @Override
