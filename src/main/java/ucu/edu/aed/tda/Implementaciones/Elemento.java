@@ -1,5 +1,6 @@
 package ucu.edu.aed.tda.Implementaciones;
 
+import java.awt.im.InputMethodRequests;
 import java.util.function.Consumer;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
@@ -82,6 +83,20 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
         consumidor.accept(this);
         if (hijoDer != null) hijoDer.inOrder(consumidor);
     }
+    
+    @Override
+    public String inOrdenString() {
+        String recorrido = this.dato.toString() + " ";
+        if (hijoIzq != null) {
+            recorrido += hijoIzq.inOrdenString();
+        }
+
+        if (hijoDer != null){
+            recorrido += hijoDer.inOrdenString();
+        }
+        return recorrido;
+    }
+
     @Override
     public void preOrder(Consumer consumidor) {
         consumidor.accept(this);

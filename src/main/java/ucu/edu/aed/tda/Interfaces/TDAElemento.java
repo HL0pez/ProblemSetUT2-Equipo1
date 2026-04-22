@@ -1,7 +1,6 @@
 package ucu.edu.aed.tda.Interfaces;
 
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /**
  * Modela un nodo del árbol binario.
@@ -121,6 +120,11 @@ public interface TDAElemento<T> {
      * si no se encuentra, retorna -1
      */
     int obtenerNivel(Comparable<T> criterioBusqueda);
+
+    /**
+     * retorna un string con el resultado del recorrido inOrden de este nodo
+     */
+    String inOrdenString();
 
     void setDato(T dato);
     

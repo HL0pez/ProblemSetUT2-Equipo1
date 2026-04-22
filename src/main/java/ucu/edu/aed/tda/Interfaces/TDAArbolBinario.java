@@ -108,4 +108,10 @@ public interface TDAArbolBinario<T> {
      * Devuelve la cantidad de nodos que NO son hojas
      */
     int cantidadNodosInternos();
+
+    /**
+     * Devuelve la altura del árbol
+     * Devuelve el recorrido del árbol en in-order
+     */
+    String inOrdenString();
 }

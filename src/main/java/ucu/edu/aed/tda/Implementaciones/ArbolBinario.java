@@ -61,6 +61,14 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
     }
 
     @Override
+    public String inOrdenString() {
+        if (raiz != null) {
+            return raiz.inOrdenString();
+        }
+        return "El árbol está vacío.";
+    }
+
+    @Override
     public void inOrder(Consumer consumidor) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'inOrder'");
