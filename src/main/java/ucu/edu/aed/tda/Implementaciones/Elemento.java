@@ -2,6 +2,8 @@ package ucu.edu.aed.tda.Implementaciones;
 
 import java.awt.im.InputMethodRequests;
 import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
@@ -44,14 +46,39 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
 
     @Override
     public TDAElemento buscar(Comparable criterioBusqueda) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscar'");
+        if (criterioBusqueda.compareTo(this.dato) == 0) return this;
+        
+        if (criterioBusqueda.compareTo(this.dato) < 0) {
+            if (hijoIzq == null) return null;
+            return hijoIzq.buscar(criterioBusqueda);
+        } else {
+            if (hijoDer == null) return null;
+            return hijoDer.buscar(criterioBusqueda);
+        }
     }
 
     @Override
     public TDAElemento eliminar(Comparable criterioBusqueda) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        if (criterioBusqueda.compareTo(this.dato) < 0) {
+            if (hijoIzq != null) {
+                hijoIzq = hijoIzq.eliminar(criterioBusqueda);
+            }
+        } else if (criterioBusqueda.compareTo(this.dato) > 0) {
+            if (hijoDer != null) {
+                hijoDer = hijoDer.eliminar(criterioBusqueda);
+            }
+        } else {
+            if (hijoIzq == null) return hijoDer;
+            if (hijoDer == null) return hijoIzq;
+
+            Elemento<T> sucesor = (Elemento<T>) hijoDer;
+            while (sucesor.hijoIzq != null) {
+                sucesor = (Elemento<T>) sucesor.hijoIzq;
+            }
+            this.dato = sucesor.dato;
+            hijoDer = hijoDer.eliminar(sucesor.dato);
+        }
+        return this;
     }
 
     @Override
@@ -86,14 +113,11 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
     
     @Override
     public String inOrdenString() {
-        String recorrido = this.dato.toString() + " ";
-        if (hijoIzq != null) {
-            recorrido += hijoIzq.inOrdenString();
-        }
+        String recorrido = "";
+        if (hijoIzq != null) recorrido += hijoIzq.inOrdenString();
+        recorrido += this.dato.toString() + " ";
 
-        if (hijoDer != null){
-            recorrido += hijoDer.inOrdenString();
-        }
+        if (hijoDer != null) recorrido += hijoDer.inOrdenString();
         return recorrido;
     }
 
@@ -113,38 +137,54 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
 
     @Override
     public boolean esHoja() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esHoja'");
+        return hijoIzq == null && hijoDer == null;
     }
 
     @Override
     public int cantidadHojas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadHojas'");
+        if (esHoja()) return 1;
+        int hojasIzq = (hijoIzq != null) ? hijoIzq.cantidadHojas() : 0;
+        int hojasDer = (hijoDer != null) ? hijoDer.cantidadHojas() : 0;
+        return hojasIzq + hojasDer;
     }
 
     @Override
     public int cantidadNodosInternos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodosInternos'");
+        if (esHoja()) return 0;
+        int nodosInternosIzq = (hijoIzq != null) ? hijoIzq.cantidadNodosInternos() : 0;
+        int nodosInternosDer = (hijoDer != null) ? hijoDer.cantidadNodosInternos() : 0;
+        return 1 + nodosInternosIzq + nodosInternosDer;
     }
 
     @Override
     public int cantidadNodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodos'");
+        int izq = (hijoIzq != null) ? hijoIzq.cantidadNodos() : 0;
+        int der = (hijoDer != null) ? hijoDer.cantidadNodos() : 0;
+        return 1 + izq + der;
     }
 
     @Override
     public int altura() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'altura'");
+        int altIzq = (hijoIzq != null) ? hijoIzq.altura() : -1;
+        int altDer = (hijoDer != null) ? hijoDer.altura() : -1;
+        return Math.max(altIzq, altDer) + 1;
     }
 
     @Override
     public int obtenerNivel(Comparable criterioBusqueda) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerNivel'");
+    if (criterioBusqueda.compareTo(this.dato) == 0) return 0;
+    
+    if (criterioBusqueda.compareTo(this.dato) < 0) {
+        if (hijoIzq == null) return -1;
+        int nivel = hijoIzq.obtenerNivel(criterioBusqueda);
+        if (nivel == -1) return -1;
+        return nivel + 1;
+    } else {
+        if (hijoDer == null) return -1;
+        int nivel = hijoDer.obtenerNivel(criterioBusqueda);
+        if (nivel == -1) return -1;
+        return nivel + 1;
+    }  
     }
 
     @Override
@@ -152,4 +192,30 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
         this.dato = dato;
     }
 
+    public List<TDAElemento<T>> completos() {
+    List<TDAElemento<T>> lista = new ArrayList<>();
+    if (hijoIzq != null) {
+        if (hijoDer != null) {
+            lista.add(this);
+        }
+    }
+    if (hijoIzq != null) {
+        lista.addAll(((Elemento<T>) hijoIzq).completos());
+    }
+    if (hijoDer != null) {
+        lista.addAll(((Elemento<T>) hijoDer).completos());
+    }
+    return lista;
+}
+
+    public List<TDAElemento<T>> enNivel(int nivel) {
+        List<TDAElemento<T>> lista = new ArrayList<>();
+        if (nivel == 0) {
+            lista.add(this);
+            return lista;
+        }
+        if (hijoIzq != null) lista.addAll(((Elemento<T>) hijoIzq).enNivel(nivel - 1));
+        if (hijoDer != null) lista.addAll(((Elemento<T>) hijoDer).enNivel(nivel - 1));
+        return lista;
+    }
 }
