@@ -76,7 +76,7 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
                 sucesor = (Elemento<T>) sucesor.hijoIzq;
             }
             this.dato = sucesor.dato;
-            hijoDer = hijoDer.eliminar(sucesor.dato);
+            hijoDer = hijoDer.eliminar((Comparable) sucesor.dato);
         }
         return this;
     }

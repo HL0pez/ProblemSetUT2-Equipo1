@@ -2,7 +2,8 @@
 package ucu.edu.aed.tda.Implementaciones;
 
 import java.util.function.Consumer;
-
+import java.util.ArrayList;
+import java.util.List;
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
 public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario<T> {
@@ -24,14 +25,17 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
 
     @Override
     public Elemento<T> obtenerRaiz() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerRaiz'");
+        return raiz;
     }
 
     @Override
     public boolean eliminar(Comparable criterioBusqueda) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        if (raiz == null) return false;
+        if (criterioBusqueda.compareTo(raiz.getDato()) == 0) {
+            raiz = (Elemento<T>) raiz.eliminar(criterioBusqueda);
+            return true;
+        }
+        return raiz.eliminar(criterioBusqueda) != null;
     }
 
     @Override
@@ -70,44 +74,54 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
 
     @Override
     public void inOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inOrder'");
+        if (raiz != null) raiz.inOrder(consumidor);
     }
 
     @Override
     public void preOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'preOrder'");
+        if (raiz != null) raiz.preOrder(consumidor);
     }
 
     @Override
     public void postOrder(Consumer consumidor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postOrder'");
+        if (raiz != null) raiz.postOrder(consumidor);
     }
 
     @Override
     public boolean esVacio() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esVacio'");
+        return raiz == null;
     }
 
     @Override
     public int cantidadNodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodos'");
+        if (raiz == null) return 0;
+        return raiz.cantidadNodos();
     }
 
     @Override
     public int cantidadHojas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadHojas'");
+        if (raiz == null) return 0;
+        return raiz.cantidadHojas();
     }
 
     @Override
     public int cantidadNodosInternos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodosInternos'");
+        if (raiz == null) return 0;
+        return raiz.cantidadNodosInternos();
     }
 
+    public List<TDAElemento<T>> completos() {
+        if (raiz == null) return new ArrayList<>();
+        return raiz.completos();
+    }
+
+    public List<TDAElemento<T>> enNivel(int nivel) {
+        if (raiz == null) return new ArrayList<>();
+        return raiz.enNivel(nivel);
+    }
+
+    public int altura() {
+        if (raiz == null) return -1;
+        return raiz.altura();
+    }
 }
