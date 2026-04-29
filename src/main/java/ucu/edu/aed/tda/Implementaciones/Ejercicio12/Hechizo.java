@@ -1,4 +1,4 @@
-package ucu.edu.aed.tda.Implementaciones;
+package ucu.edu.aed.tda.Implementaciones.Ejercicio12;
 
 public class Hechizo {
     private int id;

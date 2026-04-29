@@ -1,0 +1,46 @@
+
+Lenguaje natural:
+
+El sistema recorre el Árbol AVL completo y, por cada nodo visitado, verifica si la clase de la nave es "Explorador".
+Si lo es, su código se agrega a una lista resultado. Como el árbol AVL es un BST balanceado, el recorrido inorden entregará los códigos en orden ascendente. 
+
+
+Precondiciones:
+
+El árbol AVL fue construido correctamente, indexado por código de nave.
+Cada nodo tiene: codigo (entero positivo), clase (string) y combustible (entero positivo).
+El árbol puede estar vacío.
+
+
+Postcondiciones:
+
+Se retorna una lista con los códigos de todas las naves cuya clase es "Explorador", en orden ascendente.
+El árbol no es modificado.
+Si no existe ninguna nave exploradora, se retorna una lista vacía.
+
+
+Pseudocódigo:
+
+FUNCIÓN obtenerExploradoras(nodo):
+
+    // Caso base: nodo nulo, no hay nada que procesar
+    SI nodo == NULL ENTONCES
+        RETORNAR lista_vacía
+
+    exploradoras ← lista_vacía
+
+    // Inorden: izquierda → raíz → derecha (códigos en orden ascendente)
+    exploradoras ← exploradoras + obtenerExploradoras(nodo.izquierdo)
+
+    SI nodo.clase == "Explorador" ENTONCES
+        AGREGAR nodo.codigo a exploradoras
+
+    exploradoras ← exploradoras + obtenerExploradoras(nodo.derecho)
+
+    RETORNAR exploradoras
+
+FIN FUNCIÓN
+
+
+Caso general, mejor y peor caso: todos O(n) ya que siempre se recorre todo el arbol.
+    

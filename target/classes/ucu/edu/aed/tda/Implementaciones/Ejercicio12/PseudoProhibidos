@@ -1,0 +1,47 @@
+
+
+Consultar los hechizos prohibidos: se consideran prohibidos aquellos hechizos cuyo ID es
+impar. El sistema debe retornar una lista con todos ellos.
+
+
+Descripción en Lenguaje Natural
+
+El sistema recorre el Árbol Binario de Búsqueda completo y, por cada nodo visitado, verifica si el ID del hechizo es impar. 
+Si lo es, ese hechizo se considera prohibido y se agrega a una lista resultado. 
+
+
+Precondiciones:
+
+El árbol puede estar vacío o contener nodos válidos.
+Cada nodo tiene un campo id (entero positivo) y un campo nombre (string).
+Un hechizo es prohibido si y solo si id % 2 ≠ 0.
+
+Postcondiciones:
+
+Se retorna una lista (posiblemente vacía) con todos los nodos cuyo id es impar.
+El árbol no es modificado.
+Si el árbol está vacío, se retorna una lista vacía.
+
+
+Pseudocódigo:
+
+FUNCIÓN obtenerProhibidos(nodo):
+
+    SI nodo == NULL ENTONCES
+        RETORNAR lista_vacía
+
+    prohibidos ← lista_vacía
+
+    prohibidos ← prohibidos + obtenerProhibidos(nodo.izquierdo)
+
+    SI nodo.id MOD 2 ≠ 0 ENTONCES
+        AGREGAR nodo a prohibidos
+
+    prohibidos ← prohibidos + obtenerProhibidos(nodo.derecho)
+
+    RETORNAR prohibidos
+
+FIN FUNCIÓN
+
+
+Caso general, mejor caso y peor caso: todos O(n) ya que siempre se visitan todos los nodos.

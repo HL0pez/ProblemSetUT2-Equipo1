@@ -1,9 +1,8 @@
 package ucu.edu.aed.tda.Implementaciones;
 
-import java.awt.im.InputMethodRequests;
-import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
@@ -83,7 +82,7 @@ public class Elemento<T> implements ucu.edu.aed.tda.Interfaces.TDAElemento<T> {
 
     @Override
     public boolean insertar(Comparable nuevoDato) {
-        Elemento<T> nuevoElemento = new Elemento<>(nuevoDato);
+        Elemento<T> nuevoElemento = new Elemento<>((T) nuevoDato);
 
         if (nuevoDato.compareTo(this.dato) < 0) {
             if (hijoIzq == null) {

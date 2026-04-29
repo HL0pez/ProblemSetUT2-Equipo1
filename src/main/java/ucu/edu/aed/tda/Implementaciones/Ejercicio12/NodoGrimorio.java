@@ -1,4 +1,4 @@
-package ucu.edu.aed.tda.Implementaciones;
+package ucu.edu.aed.tda.Implementaciones.Ejercicio12;
 import java.util.List;
 
 public class NodoGrimorio {

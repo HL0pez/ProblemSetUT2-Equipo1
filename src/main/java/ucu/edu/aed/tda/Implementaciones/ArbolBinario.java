@@ -1,15 +1,12 @@
-
 package ucu.edu.aed.tda.Implementaciones;
 
 import java.util.function.Consumer;
-import java.util.ArrayList;
-import java.util.List;
+
 import ucu.edu.aed.tda.Interfaces.TDAElemento;
 
-public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario<T> {
+public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinario {
 
-    private static int contador = 0;
-    private Elemento<T> raiz;
+    private TDAElemento<T> raiz;
 
     @Override
     public T buscar(Comparable predicate) {
@@ -20,108 +17,79 @@ public class ArbolBinario<T> implements ucu.edu.aed.tda.Interfaces.TDAArbolBinar
             return resultado.getDato();
         }
         return null;
-
     }
 
     @Override
-    public Elemento<T> obtenerRaiz() {
-        return raiz;
+    public TDAElemento<T> obtenerRaiz() {
+        return this.raiz;
     }
 
     @Override
     public boolean eliminar(Comparable criterioBusqueda) {
-        if (raiz == null) return false;
-        if (criterioBusqueda.compareTo(raiz.getDato()) == 0) {
-            raiz = (Elemento<T>) raiz.eliminar(criterioBusqueda);
-            return true;
-        }
-        return raiz.eliminar(criterioBusqueda) != null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
     }
 
     @Override
     public boolean insertar(Comparable dato) {
-
-
-        if (raiz == null) {
-            ++contador;
-            Elemento<T> nuevoElemento = new Elemento<>(dato);
-            raiz = nuevoElemento;
-        }
-        else 
-        {
-            if(raiz.insertar(dato)) {
-                ++contador;
-            }else {
-                return false;
-            }
-        }
-
-        System.out.println("Contador insertar desde árbol: " + contador);
-        return true;
-    }
-
-    public int getContador() {
-        return contador;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insertar'");
     }
 
     @Override
-    public String inOrdenString() {
-        if (raiz != null) {
-            return raiz.inOrdenString();
+    public boolean insertar(Object dato) {
+        if (dato instanceof Comparable) {
+            return insertar((Comparable) dato);
         }
-        return "El árbol está vacío.";
+        throw new IllegalArgumentException("El dato debe ser Comparable");
     }
 
     @Override
     public void inOrder(Consumer consumidor) {
-        if (raiz != null) raiz.inOrder(consumidor);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inOrder'");
+    }
+
+    @Override
+    public String inOrdenString() {
+        // Minimal implementation to satisfy interface; detailed traversal may be added later
+        return "";
     }
 
     @Override
     public void preOrder(Consumer consumidor) {
-        if (raiz != null) raiz.preOrder(consumidor);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'preOrder'");
     }
 
     @Override
     public void postOrder(Consumer consumidor) {
-        if (raiz != null) raiz.postOrder(consumidor);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postOrder'");
     }
 
     @Override
     public boolean esVacio() {
-        return raiz == null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'esVacio'");
     }
 
     @Override
     public int cantidadNodos() {
-        if (raiz == null) return 0;
-        return raiz.cantidadNodos();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodos'");
     }
 
     @Override
     public int cantidadHojas() {
-        if (raiz == null) return 0;
-        return raiz.cantidadHojas();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cantidadHojas'");
     }
 
     @Override
     public int cantidadNodosInternos() {
-        if (raiz == null) return 0;
-        return raiz.cantidadNodosInternos();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cantidadNodosInternos'");
     }
 
-    public List<TDAElemento<T>> completos() {
-        if (raiz == null) return new ArrayList<>();
-        return raiz.completos();
-    }
-
-    public List<TDAElemento<T>> enNivel(int nivel) {
-        if (raiz == null) return new ArrayList<>();
-        return raiz.enNivel(nivel);
-    }
-
-    public int altura() {
-        if (raiz == null) return -1;
-        return raiz.altura();
-    }
 }

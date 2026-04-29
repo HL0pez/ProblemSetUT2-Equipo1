@@ -1,0 +1,58 @@
+
+Lenguaje natural:
+
+El sistema toma la lista de naves exploradoras obtenida en el ejercicio anterior y calcula el promedio de combustible disponible entre ellas.
+Para esto, se recorre el árbol AVL nuevamente en inorden y, por cada nodo cuya clase sea "Explorador", se acumula su combustible y se cuenta la nave.
+Al finalizar el recorrido, se divide el total acumulado entre la cantidad de exploradoras encontradas, obteniendo el promedio.
+
+
+Precondiciones:
+
+El árbol AVL fue construido correctamente y no es modificado.
+Se asume que obtenerExploradoras(nodo) ya fue implementada y funciona correctamente.
+Cada nodo exploradora tiene un campo combustible (entero positivo).
+Puede ocurrir que no exista ninguna nave exploradora en el árbol.
+
+Postcondiciones:
+
+Se retorna un número real con el promedio de combustible de las naves exploradoras.
+Si no hay naves exploradoras, se retorna 0 (o se indica que el promedio es indefinido) para evitar división por cero.
+El árbol no es modificado.
+
+
+Pseudocódigo:
+
+FUNCIÓN calcularPromedioExploradora(raiz):
+
+    totalCombustible ← 0
+    cantidadExploradoras ← 0
+
+    // Recorrido inorden acumulando combustible de exploradoras
+    FUNCIÓN auxiliar(nodo):
+        SI nodo == NULL ENTONCES
+            RETORNAR
+
+        auxiliar(nodo.izquierdo)
+
+        SI nodo.clase == "Explorador" ENTONCES
+            totalCombustible ← totalCombustible + nodo.combustible
+            cantidadExploradoras ← cantidadExploradoras + 1
+
+        auxiliar(nodo.derecho)
+
+    FIN FUNCIÓN auxiliar
+
+    auxiliar(raiz)
+
+    // Evitar división por cero
+    SI cantidadExploradoras == 0 ENTONCES
+        RETORNAR 0
+
+    RETORNAR totalCombustible / cantidadExploradoras
+
+FIN FUNCIÓN
+
+
+Recorrido del arbol O(n)
+Suma O(1) por nodo
+Division final O(1)

@@ -1,0 +1,51 @@
+
+Generar el cántico: recorrer el árbol en inorden y concatenar los nombres de los hechizos
+prohibidos, separados por " - ", formando así el cántico secreto de Aldric.
+
+Descripción en Lenguaje Natural
+
+El sistema recorre el Árbol Binario de Búsqueda en inorden (izquierda → raíz → derecha), lo que garantiza visitar los nodos en orden ascendente de ID.
+Durante el recorrido, por cada nodo que sea un hechizo prohibido (ID impar), se concatena su nombre a una cadena de texto.
+Los nombres se unen con el separador " - " formando así el cántico secreto de Aldric.
+
+
+Precondiciones:
+
+El árbol puede estar vacío o contener nodos válidos.
+Se asume que la función obtenerProhibidos(nodo) ya fue implementada y funciona correctamente.
+Cada nodo tiene un campo id (entero positivo) y un campo nombre (string).
+El separador entre nombres es " - "
+
+Postcondiciones:
+
+Se retorna un string con los nombres de los hechizos prohibidos, concatenados en orden ascendente de ID, separados por " - "
+Si no hay hechizos prohibidos, se retorna un string vacío.
+El árbol no es modificado.
+
+
+Pseudocódigo:
+
+FUNCIÓN generarCantico(raiz):
+
+    prohibidos ← obtenerProhibidos(raiz)   // Lista ordenada (inorden)
+
+    SI prohibidos está vacía ENTONCES
+        RETORNAR ""
+
+    cantico ← ""
+
+    PARA i DESDE 0 HASTA longitud(prohibidos) - 1 HACER
+
+        SI i == 0 ENTONCES
+            cantico ← prohibidos[i].nombre
+        SINO
+            cantico ← cantico + " - " + prohibidos[i].nombre
+
+    FIN PARA
+
+    RETORNAR cantico
+
+FIN FUNCIÓN
+
+obtenerProhibidos(nodo) es O(n), ya que visita todos los nodos una vez.
+El bucle de concatenación es O(k), k = hechizos prohibidos

@@ -21,6 +21,7 @@ public class Main {
             );
 
             ArbolBinario<Integer> arbol = new ArbolBinario<>();
+            int contador = 0;
 
             String linea;
 
@@ -29,8 +30,9 @@ public class Main {
                 int clave = Integer.parseInt(linea);
 
                 arbol.insertar(clave);
+                contador++;
 
-                salida.write(clave + " " + arbol.getContador());
+                salida.write(clave + " " + contador);
                 salida.newLine();
             }
 

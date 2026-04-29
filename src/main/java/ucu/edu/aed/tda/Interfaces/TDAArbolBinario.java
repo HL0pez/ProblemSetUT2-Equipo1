@@ -114,4 +114,6 @@ public interface TDAArbolBinario<T> {
      * Devuelve el recorrido del árbol en in-order
      */
     String inOrdenString();
+
+    boolean insertar(T dato);
 }
