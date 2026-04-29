@@ -1,9 +1,9 @@
-package ucu.edu.aed.tda.Implementaciones;
+package ucu.edu.aed.tda.Implementaciones.Ejercicio7pt1;
 
 public class ArbolExpresion {
     private NodoExpresion raiz;
-    public ArbolExpresion() {
-        this.raiz = null;
+    public ArbolExpresion(NodoExpresion raiz) {
+        this.raiz = raiz;
     }
 
     public void sustituirVariables(String variable, String valor) {

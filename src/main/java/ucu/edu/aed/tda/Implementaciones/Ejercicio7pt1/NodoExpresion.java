@@ -1,4 +1,4 @@
-package ucu.edu.aed.tda.Implementaciones;
+package ucu.edu.aed.tda.Implementaciones.Ejercicio7pt1;
 
 public class NodoExpresion {
 
