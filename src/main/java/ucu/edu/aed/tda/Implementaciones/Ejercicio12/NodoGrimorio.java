@@ -1,4 +1,5 @@
 package ucu.edu.aed.tda.Implementaciones.Ejercicio12;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NodoGrimorio {
@@ -38,5 +39,18 @@ public class NodoGrimorio {
         if (der != null) {
             der.hechizosProhibidos(lista);
         }
+    }
+        public String generarCantico() {
+        List<Hechizo> prohibidos = new ArrayList<>();
+        hechizosProhibidos(prohibidos);
+        
+        String cantico = "";
+        for (int i = 0; i < prohibidos.size(); i++) {
+            if (i > 0) {
+                cantico += " - ";
+            }
+            cantico += prohibidos.get(i).getNombre();
+        }
+        return cantico;
     }
 }

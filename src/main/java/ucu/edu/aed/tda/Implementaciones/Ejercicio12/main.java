@@ -1,5 +1,8 @@
 package ucu.edu.aed.tda.Implementaciones.Ejercicio12;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class main {
     
     //construir el grimorio insertando lo siguiente: (42, "Fireball"), (17, "Ice Lance"), (58, "Thunder"),
@@ -17,6 +20,16 @@ public class main {
         grimorio.insertar(new Hechizo(50, "Teleport"));
         grimorio.insertar(new Hechizo(65, "Shield"));
         grimorio.insertar(new Hechizo(88, "Curse"));
+
+        List<Hechizo> prohibidos = new ArrayList<>();
+        grimorio.hechizosProhibidos(prohibidos);
+
+        System.out.println("Hechizos prohibidos:");
+        for (Hechizo h : prohibidos) {
+            System.out.println(h.getId() + " - " + h.getNombre());
+        }
+
+        System.out.println("Cántico: " + grimorio.generarCantico());
 
     }
 }
