@@ -1,5 +1,7 @@
 package ucu.edu.aed.tda.Implementaciones.Ejercicio13;
 
+import java.util.List;
+
 public class main {
     public static void main(String[] args) {
         ArbolAVL registro = new ArbolAVL();
@@ -20,5 +22,11 @@ public class main {
         for (Nave nave : naves) {
             registro.insertar(nave);
         }
+
+        List<Integer> exploradoras = registro.obtenerExploradoras();
+        System.out.println("Exploradoras: " + exploradoras);
+
+        double promedio = registro.calcularPromedioExploradora();
+        System.out.println("Combustible promedio: " + promedio);
     }
 }

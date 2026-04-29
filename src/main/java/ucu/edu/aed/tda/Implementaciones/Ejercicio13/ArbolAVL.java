@@ -1,5 +1,8 @@
 package ucu.edu.aed.tda.Implementaciones.Ejercicio13;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArbolAVL {
     private NodoAVL raiz;
 
@@ -88,5 +91,35 @@ public class ArbolAVL {
         return y;
     }
 
+    public List<Integer> obtenerExploradoras() {
+        List<Integer> lista = new ArrayList<>();
+        obtenerExploradorasRec(raiz, lista);
+        return lista;
+    }
 
+    private void obtenerExploradorasRec(NodoAVL nodo, List<Integer> lista) {
+        if (nodo == null) return;
+        obtenerExploradorasRec(nodo.getIzquierda(), lista);
+        if (nodo.getNave().getClase().equals("Explorador")) {
+            lista.add(nodo.getNave().getCodigo());
+        }
+        obtenerExploradorasRec(nodo.getDerecha(), lista);
+    }
+
+    public double calcularPromedioExploradora() {
+        int[] datos = {0, 0}; // datos[0] = total combustible, datos[1] = cantidad
+        calcularPromedioRec(raiz, datos);
+        if (datos[1] == 0) return 0;
+        return (double) datos[0] / datos[1];
+    }
+
+    private void calcularPromedioRec(NodoAVL nodo, int[] datos) {
+        if (nodo == null) return;
+        calcularPromedioRec(nodo.getIzquierda(), datos);
+        if (nodo.getNave().getClase().equals("Explorador")) {
+            datos[0] += nodo.getNave().getCombustible();
+            datos[1]++;
+        }
+        calcularPromedioRec(nodo.getDerecha(), datos);
+    }
 }
