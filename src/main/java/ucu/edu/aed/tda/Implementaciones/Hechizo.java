@@ -1,0 +1,19 @@
+package ucu.edu.aed.tda.Implementaciones;
+
+public class Hechizo {
+    private int id;
+    private String nombre;
+
+    public Hechizo(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+}
